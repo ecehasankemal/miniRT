@@ -6,7 +6,7 @@
 /*   By: tcakmako <tcakmako@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 13:51:43 by tcakmako          #+#    #+#             */
-/*   Updated: 2023/05/22 13:21:27 by hece             ###   ########.tr       */
+/*   Updated: 2023/05/22 14:40:16 by tcakmako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_color3	ray_color(t_ray3 *r, const t_objects *objs, const int depth)
 			diff_intensity = vector3_scm(objs->point_light.c, light_factor);
 		if (depth < 5)
 			reflected = vector3_ewm(objs->ambient_light.c, rec.c);
-		return (color3_add(reflected, diff_intensity));
+		return (vector3_add(reflected, diff_intensity));
 	}
 	return (objs->ambient_light.c);
 }
@@ -81,7 +81,7 @@ void	draw_mlx_w_sampling(t_mlx_image *img, const t_objects *objs)
 		{
 			rand_color = average_color(img, objs, i, j);
 			color = color3_get_color(rand_color);
-			t_mlx_image_set_pixel(img, i, (img->height - j), color);
+			t_mlx_image_set_pixel(img, i, (img->height - j - 1), color);
 		}
 	}
 	printf("\e[0;32mRendering complete!\e[0m\n");
